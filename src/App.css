@@ -505,6 +505,12 @@ body.light-mode .register-input:focus {
   border-color: #71717a;
   box-shadow: 0 0 0 2px rgba(113, 113, 122, 0.15);
 }
+.input-container input,
+.input-container select,
+.input-container button {
+  width: 100%;
+  margin: 0; /* Про всяк випадок вбиваємо приховані відступи браузера */
+}
 
 @keyframes fadeIn {
   from {

@@ -21,9 +21,14 @@ export default function TodoForm() {
           placeholder="Що плануємо зробити?"
         />
         <input
-          type="date"
+          type={deadlineDate ? "date" : "text"}
+          placeholder="Дата (дд.мм.рррр)"
           value={deadlineDate}
           onChange={(e) => setDeadlineDate(e.target.value)}
+          onFocus={(e) => (e.target.type = "date")}
+          onBlur={(e) => {
+            if (!deadlineDate) e.target.type = "text";
+          }}
         />
         <select value={category} onChange={(e) => setCategory(e.target.value)}>
           <option value="">Категорія</option>
