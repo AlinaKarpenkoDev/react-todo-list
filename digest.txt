@@ -1,0 +1,1548 @@
+Directory structure:
+└── todo/
+    ├── README.md
+    ├── package.json
+    ├── public/
+    │   ├── index.html
+    │   ├── manifest.json
+    │   └── robots.txt
+    └── src/
+        ├── App.css
+        ├── App.js
+        ├── index.css
+        ├── index.js
+        ├── components/
+        │   ├── FilterBar.jsx
+        │   ├── Modal.jsx
+        │   ├── ProgressBar.jsx
+        │   ├── RegisterForm.jsx
+        │   ├── TodoForm.jsx
+        │   └── TodoList.jsx
+        └── context/
+            ├── ThemeContext.jsx
+            ├── TodoContext.jsx
+            └── useLocalStorage.jsx
+
+================================================
+FILE: README.md
+================================================
+# Getting Started with Create React App
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Available Scripts
+
+In the project directory, you can run:
+
+### `npm start`
+
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
+
+### `npm test`
+
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+### `npm run build`
+
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
+
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
+
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `npm run eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+
+================================================
+FILE: package.json
+================================================
+{
+  "name": "todo",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^13.5.0",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "react-hook-form": "^7.75.0",
+    "react-router-dom": "^7.15.0",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
+
+
+
+================================================
+FILE: public/index.html
+================================================
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>React App</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
+</html>
+
+
+
+================================================
+FILE: public/manifest.json
+================================================
+{
+  "short_name": "React App",
+  "name": "Create React App Sample",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
+
+
+
+================================================
+FILE: public/robots.txt
+================================================
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Disallow:
+
+
+
+================================================
+FILE: src/App.css
+================================================
+body {
+  background-color: #121212;
+  color: #e0e0e0;
+  font-family: sans-serif;
+  margin: 0;
+  padding-top: 80px;
+}
+
+/* Вирівнювання всього контенту по центру */
+.App {
+  max-width: 600px; /* Трохи розширила, щоб влізли всі нові кнопки */
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 30px;
+}
+
+/* Контейнер для поля вводу та кнопки */
+.input-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+
+input,
+select {
+  flex-grow: 1;
+  padding: 12px;
+  background-color: #2c2c2c;
+  color: white;
+  border: 1px solid #444;
+  border-radius: 4px;
+  font-size: 16px;
+  outline: none;
+}
+
+input:focus {
+  border-color: #888;
+}
+
+.input-container button {
+  padding: 0 20px;
+  background-color: #333;
+  color: white;
+  border: 1px solid #444;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.input-container button:hover {
+  background-color: #555;
+}
+
+/* Список */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1e1e1e;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  text-align: left;
+}
+
+/* Контейнер для кнопок дій */
+.action-buttons {
+  display: flex;
+  gap: 10px; /* Відстань між кнопочками */
+}
+
+/* Базовий стиль для всіх кнопок у списку */
+li button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+/* Індивідуальні кольори кнопок */
+.btn-check {
+  color: #4caf50; /* Зелений */
+}
+.btn-check:hover {
+  background-color: rgba(76, 175, 80, 0.1);
+}
+
+.btn-edit {
+  color: #ffb74d; /* Помаранчевий */
+}
+.btn-edit:hover {
+  background-color: rgba(255, 183, 77, 0.1);
+}
+
+.btn-delete {
+  color: #8e0000; /* Червоний */
+}
+.btn-delete:hover {
+  background-color: rgba(255, 82, 82, 0.1);
+}
+
+/* Режим редагування */
+.edit-mode {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+}
+
+.btn-save {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 0 15px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.btn-save:hover {
+  background-color: #45a049;
+}
+
+.done {
+  text-decoration: line-through;
+  color: #777; /* Робимо сірим, щоб було видно на темному фоні */
+}
+
+.filters {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #333; /* Тонка лінія, що відділяє список від фільтрів */
+}
+
+/* Базовий вигляд кнопок-фільтрів */
+.filters button {
+  background-color: #2c2c2c;
+  color: #aaa;
+  border: 1px solid #444;
+  padding: 8px 20px;
+  border-radius: 20px; /* Робимо їх закругленими */
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.filters button:hover {
+  background-color: #444;
+  color: #fff;
+}
+
+/* Стиль для активної (натиснутої) вкладки */
+.filters button.active-filter {
+  background-color: #bfb9b9; /* Фіолетовий акцент */
+  color: #000;
+  border-color: #ffffff;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 18px;
+  color: #7f7a85;
+  margin-bottom: 20px;
+}
+
+.empty-msg {
+  color: #777;
+  font-style: italic;
+  margin-top: 20px;
+}
+
+.btn-clear {
+  background-color: transparent;
+  color: #c30909;
+  border: 1px solid #780606;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 15px; /* Відступ зверху від фільтрів */
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-clear:hover {
+  background-color: white; /* При наведенні зафарбовуємо повністю */
+  color: #7f7a85;
+  border: 1px solid #817878;
+}
+
+/* Світла тема для всього body */
+body.light-mode {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+/* Перефарбовуємо елементи списку для світлої теми */
+body.light-mode li {
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Додаємо легку тінь */
+}
+
+/* Інпут у світлій темі */
+body.light-mode input {
+  background-color: #fff;
+  color: #333;
+  border-color: #ccc;
+}
+
+body.light-mode .filters button {
+  background-color: #e0e0e0;
+  color: #555;
+  border-color: #ccc;
+}
+
+body.light-mode .filters button.active-filter {
+  background-color: #d0b5b5;
+  color: #fff;
+}
+
+/* === Кнопка перемикання теми === */
+.theme-toggle-btn {
+  background-color: #2c2c2c;
+  color: #e0e0e0;
+  border: 1px solid #444;
+  padding: 8px 16px;
+  border-radius: 20px; /* Робить кнопку круглою як пігулка */
+  font-size: 14px;
+  cursor: pointer;
+  margin-bottom: 20px; /* Відступ вниз до заголовка h1 */
+  transition: all 0.3s ease; /* Плавність всіх змін */
+}
+
+/* Ефект при наведенні мишки (Темна тема) */
+.theme-toggle-btn:hover {
+  background-color: #444;
+  transform: scale(1.05); /* Легке збільшення кнопки */
+}
+
+/* Як кнопка виглядає, коли включена Світла тема */
+body.light-mode .theme-toggle-btn {
+  background-color: #ffffff;
+  color: #333;
+  border-color: #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Легка тінь */
+}
+
+/* Ефект при наведенні мишки (Світла тема) */
+body.light-mode .theme-toggle-btn:hover {
+  background-color: #f0f0f0;
+}
+
+/* Затемнений фон на весь екран */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Щоб вікно було поверх усього */
+}
+
+/* Саме біле віконечко */
+.modal-content {
+  background-color: #2c2c2c;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+  width: 90%;
+}
+
+/* Адаптація для світлої теми */
+body.light-mode .modal-content {
+  background-color: #fff;
+  color: #333;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.btn-confirm {
+  background-color: #ff5252;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-cancel {
+  background-color: transparent;
+  color: #aaa;
+  border: 1px solid #aaa;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+body.light-mode .btn-cancel {
+  color: #555;
+  border-color: #555;
+}
+
+.overdue {
+  color: #ff5252;
+  font-weight: bold;
+}
+
+/* Контейнер для тексту і дати */
+.task-info {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Відстань між текстом і датою */
+  flex-grow: 1; /* Забирає весь вільний простір, відштовхуючи кнопки вправо */
+  text-align: left;
+}
+
+/* Сама дата (бірка) */
+.task-deadline {
+  font-size: 12px;
+  color: #aaa;
+  background-color: #333;
+  padding: 4px 10px;
+  border-radius: 12px;
+  white-space: nowrap; /* Щоб дата ніколи не переносилася на новий рядок */
+}
+
+body.light-mode .task-deadline {
+  background-color: #eee;
+  color: #555;
+}
+
+/* Якщо прострочено */
+.overdue {
+  color: #ff5252;
+  background-color: rgba(255, 82, 82, 0.1);
+  font-weight: bold;
+}
+
+/* Стилізуємо поле вводу дати (зверху) */
+input[type="date"] {
+  background-color: #2c2c2c;
+  color: white;
+  border: 1px solid #444;
+  border-radius: 4px;
+  padding: 12px;
+  font-size: 14px;
+  outline: none;
+  cursor: pointer;
+}
+
+body.light-mode input[type="date"] {
+  background-color: #fff;
+  color: #333;
+  border-color: #ccc;
+}
+
+.progress-container {
+  width: 100%;
+  height: 10px;
+  background-color: #444; /* Колір порожнього бару */
+  border-radius: 10px;
+  margin: 15px 0;
+  overflow: hidden;
+}
+
+body.light-mode .progress-container {
+  background-color: #e0e0e0;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: #4caf50; /* Зелений колір виконання */
+  transition: width 0.4s ease-in-out; /* Плавна анімація росту */
+}
+
+.category-badge {
+  font-size: 0.75rem; /* Робимо текст трохи меншим за основний */
+  background-color: #3a3a3c; /* Темно-сірий фон бейджика */
+  color: #a1a1aa; /* Світло-сірий текст */
+  padding: 4px 8px; /* Відступи всередині */
+  border-radius: 12px; /* Красиві закруглені кути */
+  margin-right: 12px; /* Відступ від тексту справи */
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+/* Якщо ти користуєшся світлою темою, додамо ще ось це: */
+body.light-mode .category-badge {
+  background-color: #e4e4e7;
+  color: #52525b;
+}
+
+.selectCategory {
+  font-size: 0.7rem; /* Робимо шрифт ще меншим */
+  padding: 2px 6px; /* Мінімальні відступи, щоб зекономити місце */
+  background-color: transparent; /* Прозорий фон, щоб не привертати зайвої уваги */
+  border: 1px dashed #71717a; /* Пунктирна рамка — класичний UI-прийом для порожніх зон */
+  color: #71717a; /* Приглушений колір тексту */
+  border-radius: 12px;
+  cursor: pointer; /* Курсор-палець, щоб було зрозуміло, що сюди можна клікати */
+  transition: all 0.2s ease; /* Плавність для ховеру */
+}
+
+/* Додаємо ефект при наведенні мишки, щоб елемент "оживав" */
+.selectCategory:hover {
+  border-color: #a1a1aa;
+  color: #a1a1aa;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Для світлої теми (якщо вона є) */
+body.light-mode .selectCategory {
+  border-color: #a1a1aa;
+  color: #a1a1aa;
+}
+
+body.light-mode .selectCategory:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #52525b;
+  border-color: #52525b;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header input {
+  padding: 10px;
+  height: 15px;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* Відстань між елементами */
+  max-width: 350px;
+  margin: 40px auto; /* Центруємо форму по горизонталі */
+  padding: 30px;
+  background-color: #1a1a1a; /* Темний фон, як у Todo */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.register-input {
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #3f3f46;
+  background-color: #27272a;
+  color: white;
+  font-size: 16px;
+}
+
+.register-input:focus {
+  outline: none;
+  border-color: #deff9a; /* Твій фірмовий салатовий акцент */
+}
+
+.error-message {
+  color: #cb3a3a; /* Червоний колір для помилок */
+  font-size: 12px;
+  margin-top: -10px; /* Трохи підтягуємо текст до інпуту */
+}
+
+.light-mode .register-form {
+  background-color: #f7f7f8;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.light-mode .register-input {
+  background-color: #f4f4f5;
+  border-color: #e4e4e7;
+  color: #18181b;
+}
+
+.light-mode .register-input:focus {
+  border-color: #7c7c7c; /* Трохи темніший зелений, щоб було видно на білому */
+}
+.light-mode .input-error {
+  border-color: darkred;
+}
+.submit-btn {
+  padding: 12px;
+  background-color: #aeaeae;
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.input-error {
+  border-color: darkred;
+}
+
+.logout-btn {
+  background-color: transparent;
+  color: #ef4444; /* Червоний текст */
+  border: 1px solid #ef4444; /* Червона рамка */
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: 15px;
+  transition: all 0.2s ease;
+}
+
+.logout-btn:hover {
+  background-color: #ef4444;
+  color: white;
+}
+
+/* --- СТИЛІ ДЛЯ ШАПКИ --- */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px; /* Залишаємо тільки відступ знизу */
+  padding: 10px 0;
+  width: 100%; /* Вона автоматично стане рівно 600px, як і .App */
+}
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.search-input {
+  flex-grow: 0;
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: 1px solid #3f3f46;
+  background-color: #27272a;
+  color: white;
+  width: 150px;
+  font-size: 16px;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #deff9a;
+}
+
+/* Світла тема для пошуку (якщо потрібно) */
+.light-theme .search-input {
+  background-color: #f4f4f5;
+  border-color: #e4e4e7;
+  color: #18181b;
+}
+.header-left,
+.header-right {
+  display: flex;
+  align-items: center; /* Це головна магія, яка ставить все на один рівень по вертикалі */
+}
+
+.header-right {
+  gap: 15px; /* Відстань між іменем, місяцем і кнопкою */
+}
+
+.user-greeting {
+  color: #969595;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* Вбиваємо всі приховані зовнішні відступи, через які елементи "стрибали" по висоті */
+.search-input,
+.theme-toggle-btn,
+.logout-btn {
+  margin: 0 !important;
+}
+
+/* === УНІВЕРСАЛЬНІ ІНПУТИ (ТЕМНА ТЕМА) === */
+input,
+select,
+.search-input,
+.register-input {
+  background-color: #27272a;
+  color: #f4f4f5;
+  border: 1px solid #3f3f46;
+  border-radius: 6px;
+  padding: 12px 15px; /* Універсальний розмір */
+  font-size: 16px;
+  transition: all 0.2s ease;
+}
+
+/* Красиве світіння, коли ми клікаємо на інпут */
+input:focus,
+select:focus,
+.search-input:focus,
+.register-input:focus {
+  outline: none;
+  border-color: #deff9a; /* Твій фірмовий салатовий */
+  box-shadow: 0 0 0 2px rgba(222, 255, 154, 0.15); /* М'яка тінь */
+}
+
+/* === УНІВЕРСАЛЬНІ ІНПУТИ (СВІТЛА ТЕМА) === */
+body.light-mode input,
+body.light-mode select,
+body.light-mode .search-input,
+body.light-mode .register-input {
+  background-color: #ffffff;
+  color: #18181b;
+  border: 1px solid #d4d4d8;
+}
+
+body.light-mode input:focus,
+body.light-mode select:focus,
+body.light-mode .search-input:focus,
+body.light-mode .register-input:focus {
+  border-color: #71717a;
+  box-shadow: 0 0 0 2px rgba(113, 113, 122, 0.15);
+}
+/* === АНІМАЦІЯ ПОЯВИ === */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(
+      15px
+    ); /* Спочатку елемент прозорий і трохи опущений вниз */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(
+      0
+    ); /* Потім плавно з'являється і стає на своє місце */
+  }
+}
+
+/* Цей клас ми будемо вішати на все, що хочемо анімувати */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+
+
+================================================
+FILE: src/App.js
+================================================
+import { useContext } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import TodoForm from "./components/TodoForm";
+import TodoList from "./components/TodoList";
+import Modal from "./components/Modal";
+import FilterBar from "./components/FilterBar";
+import ProgressBar from "./components/ProgressBar";
+import RegisterForm from "./components/RegisterForm";
+import { ThemeContext } from "./context/ThemeContext";
+import { TodoContext } from "./context/TodoContext";
+import useLocalStorage from "./context/useLocalStorage";
+import "./App.css";
+
+function App() {
+  const { isDarkMode, setIsDarkMode } = useContext(ThemeContext);
+  const { itemToDelete, searchQuery, setSearchQuery } = useContext(TodoContext);
+
+  const [currentUser, setCurrentUser] = useLocalStorage("user", null);
+
+  document.title = "Todo List";
+
+  return (
+    <div className={`App ${isDarkMode === false ? "light-theme" : ""}`}>
+      {currentUser && (
+        <div className="container">
+          {/* --- ПРОФЕСІЙНИЙ HEADER --- */}
+          <div className="header">
+            {/* Ліва частина: Пошук */}
+            <div className="header-left">
+              <input
+                type="text"
+                placeholder="Пошук.."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="search-input"
+              />
+            </div>
+
+            {/* Права частина: Керування (Тема + Вихід) */}
+            <div className="header-right">
+              <button
+                className="theme-toggle-btn"
+                onClick={() => setIsDarkMode(!isDarkMode)}
+              >
+                {isDarkMode === false ? "☀️" : "🌙"}
+              </button>
+              <span className="user-greeting">{currentUser}</span>
+              <button
+                className="logout-btn"
+                onClick={() => setCurrentUser(null)}
+              >
+                Вийти
+              </button>
+            </div>
+          </div>
+          {/* --- КІНЕЦЬ HEADER --- */}
+        </div>
+      )}
+      <Routes>
+        <Route
+          path="/login"
+          element={
+            // Якщо користувач ВЖЕ є, примусово кидаємо його на /tasks. Якщо ні — показуємо форму.
+            currentUser ? (
+              <Navigate to="/tasks" replace />
+            ) : (
+              <>
+                <button
+                  className="theme-toggle-btn"
+                  onClick={() => setIsDarkMode(!isDarkMode)}
+                >
+                  {isDarkMode === false ? "☀️" : "🌙"}
+                </button>
+                <RegisterForm setCurrentUser={setCurrentUser} />
+              </>
+            )
+          }
+        />
+
+        <Route
+          path="/tasks"
+          element={
+            // ОХОРОНЕЦЬ: Якщо користувача НЕМАЄ, кидаємо на /login. Якщо є — показуємо додаток.
+            currentUser ? (
+              <>
+                <div className="animate-fade-in">
+                  <h1>Список справ</h1>
+                  <TodoForm />
+                  <ProgressBar />
+                  <TodoList />
+                  <FilterBar />
+                  {itemToDelete && <Modal />}
+                </div>
+              </>
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
+        />
+        <Route
+          path="*"
+          element={<Navigate to={currentUser ? "/tasks" : "/login"} replace />}
+        />
+      </Routes>
+    </div>
+  );
+}
+
+export default App;
+
+
+
+================================================
+FILE: src/index.css
+================================================
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+
+================================================
+FILE: src/index.js
+================================================
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom"; //
+import ThemeProvider from "./context/ThemeContext";
+import TodoProvider from "./context/TodoContext";
+import "./index.css";
+import App from "./App";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <BrowserRouter>
+    <ThemeProvider>
+      <TodoProvider>
+        <App />
+      </TodoProvider>
+    </ThemeProvider>
+  </BrowserRouter>
+);
+
+
+
+================================================
+FILE: src/components/FilterBar.jsx
+================================================
+import { useContext } from "react";
+import { TodoContext } from "./../context/TodoContext";
+
+export default function FilterBar() {
+  const { filter, setFilter } = useContext(TodoContext);
+  return (
+    <div className="filters">
+      <button
+        className={filter === "all" ? "active-filter" : ""}
+        onClick={() => setFilter("all")}
+      >
+        Всі
+      </button>
+      <button
+        className={filter === "active" ? "active-filter" : ""}
+        onClick={() => setFilter("active")}
+      >
+        Активні
+      </button>
+      <button
+        className={filter === "completed" ? "active-filter" : ""}
+        onClick={() => setFilter("completed")}
+      >
+        Виконані
+      </button>
+    </div>
+  );
+}
+
+
+
+================================================
+FILE: src/components/Modal.jsx
+================================================
+import { useContext } from "react";
+import { TodoContext } from "./../context/TodoContext";
+
+export default function Modal() {
+  const { confirmDelete, setItemToDelete } = useContext(TodoContext);
+  return (
+    <div className="modal-overlay">
+      <div className="modal-content">
+        <h3>Ти точно хочеш видалити цю справу? 🗑️</h3>
+        <div className="modal-actions">
+          <button className="btn-confirm" onClick={confirmDelete}>
+            Так, видалити
+          </button>
+          <button className="btn-cancel" onClick={() => setItemToDelete(null)}>
+            Ні, залишити
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
+
+================================================
+FILE: src/components/ProgressBar.jsx
+================================================
+import { useContext } from "react";
+import { TodoContext } from "./../context/TodoContext";
+
+export default function ProgressBar() {
+  const { completionPercentage } = useContext(TodoContext);
+  return (
+    <div className="">
+      <div className="progress-container">
+        {/* Тут магія: ширина змінюється динамічно */}
+        <div
+          className="progress-fill"
+          style={{ width: `${completionPercentage}%` }}
+        ></div>
+      </div>
+      <p>Виконано: {completionPercentage}%</p>
+    </div>
+  );
+}
+
+
+
+================================================
+FILE: src/components/RegisterForm.jsx
+================================================
+[Binary file]
+
+
+================================================
+FILE: src/components/TodoForm.jsx
+================================================
+[Binary file]
+
+
+================================================
+FILE: src/components/TodoList.jsx
+================================================
+import { useContext } from "react";
+import { TodoContext } from "./../context/TodoContext";
+import { ThemeContext } from "./../context/ThemeContext";
+
+const formatEuropeanDate = (dateString) => {
+  if (!dateString) return "";
+  const [year, month, day] = dateString.split("-");
+  return `${day}.${month}.${year}`;
+};
+
+export default function TodoList() {
+  const {
+    filteredList,
+    filter,
+    editId,
+    editText,
+    saveEdit,
+    setEditText,
+    toggleComplete,
+    edit,
+    setItemToDelete,
+    editCategoryId,
+    setEditCategoryId,
+    saveEditCategory,
+  } = useContext(TodoContext);
+
+  const { isDarkMode } = useContext(ThemeContext);
+
+  return (
+    <ul>
+      {filteredList.length === 0 ? (
+        // Якщо порожньо:
+        <p className="empty-msg">
+          {filter === "completed"
+            ? "Немає жодної виконаної справи 🤷‍♀️"
+            : "Список порожній ✨"}
+        </p>
+      ) : (
+        // Якщо є справи — виводимо їх як зазвичай:
+        filteredList.map((list) => {
+          return (
+            <li
+              style={
+                isDarkMode
+                  ? { backgroundColor: list.color, color: "white" }
+                  : {}
+              }
+              key={list.id}
+            >
+              {list.id === editId ? (
+                // РЕЖИМ РЕДАГУВАННЯ
+                <div className="edit-mode">
+                  <input
+                    type="text"
+                    value={editText}
+                    onChange={(e) => setEditText(e.target.value)}
+                  />
+                  <button className="btn-save" onClick={saveEdit}>
+                    Зберегти
+                  </button>
+                </div>
+              ) : (
+                // ЗВИЧАЙНИЙ РЕЖИМ
+                <>
+                  <div className="task-info">
+                    <span
+                      className={list.isDone ? "done task-text" : "task-text"}
+                    >
+                      {list.text}
+                    </span>
+                    {editCategoryId === list.id ? (
+                      <select
+                        value={list.category}
+                        onChange={(e) =>
+                          saveEditCategory(list.id, e.target.value)
+                        }
+                      >
+                        <option value="Дім">🏠 Дім</option>
+                        <option value="Робота">💼 Робота</option>
+                        <option value="Навчання">📚 Навчання</option>
+                      </select>
+                    ) : (
+                      <span onClick={() => setEditCategoryId(list.id)}>
+                        {list.category ? (
+                          <span className="category-badge">
+                            {list.category}
+                          </span>
+                        ) : (
+                          <span className="selectCategory">
+                            Вибрати категорію
+                          </span>
+                        )}
+                      </span>
+                    )}
+
+                    {list.deadline && (
+                      <span
+                        className={`task-deadline ${
+                          !list.isDone &&
+                          new Date().toISOString().split("T")[0] > list.deadline
+                            ? "overdue"
+                            : ""
+                        }`}
+                      >
+                        до {formatEuropeanDate(list.deadline)}
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="action-buttons">
+                    <button
+                      className="btn-check"
+                      onClick={() => toggleComplete(list.id)}
+                    >
+                      {list.isDone ? "🔁" : "✔"}
+                    </button>
+                    <button className="btn-edit" onClick={() => edit(list)}>
+                      ✏️ Ред.
+                    </button>
+                    <button
+                      className="btn-delete"
+                      onClick={() => setItemToDelete(list.id)}
+                    >
+                      Видалити
+                    </button>
+                  </div>
+                </>
+              )}
+            </li>
+          );
+        })
+      )}
+    </ul>
+  );
+}
+
+
+
+================================================
+FILE: src/context/ThemeContext.jsx
+================================================
+import { createContext, useState, useEffect } from "react";
+
+// 1. Створюємо саму порожню "хмару"
+export const ThemeContext = createContext();
+
+// 2. Створюємо "Провайдер" — компонент, який обгорне наш додаток і роздаватиме дані
+export default function ThemeProvider({ children }) {
+  const [isDarkMode, setIsDarkMode] = useState(true);
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.body.classList.add("dark-mode");
+      document.body.classList.remove("light-mode");
+    } else {
+      document.body.classList.add("light-mode");
+      document.body.classList.remove("dark-mode");
+    }
+  }, [isDarkMode]);
+
+  return (
+    // У value ми покладемо те, що хочемо віддати іншим файлам
+    <ThemeContext.Provider
+      value={{
+        isDarkMode,
+        setIsDarkMode,
+      }}
+    >
+      {children}
+    </ThemeContext.Provider>
+  );
+}
+
+
+
+================================================
+FILE: src/context/TodoContext.jsx
+================================================
+import { createContext, useState, useMemo } from "react";
+import useLocalStorage from "./useLocalStorage";
+
+// 1. Створюємо саму порожню "хмару"
+export const TodoContext = createContext();
+
+// 2. Створюємо "Провайдер" — компонент, який обгорне наш додаток і роздаватиме дані
+export default function TodoProvider({ children }) {
+  const [inputText, setInputText] = useState("");
+  const [editId, setEditId] = useState(null);
+  const [editText, setEditText] = useState("");
+  const [deadlineDate, setDeadlineDate] = useState("");
+  const [filter, setFilter] = useState("all");
+  const [itemToDelete, setItemToDelete] = useState(null);
+  const [editCategoryId, setEditCategoryId] = useState(null);
+
+  const [category, setCategory] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const [newList, setNewList] = useLocalStorage("todos", []);
+
+  const addNewList = () => {
+    if (inputText.trim()) {
+      setNewList([
+        ...newList,
+        {
+          id: Date.now(),
+          text: inputText,
+          isDone: false,
+          deadline: deadlineDate,
+          category: category,
+          color: getPaletteColor(),
+        },
+      ]);
+      setInputText("");
+      setDeadlineDate("");
+      setCategory("");
+    }
+  };
+
+  const deleteItem = (listId) => {
+    const filterDelete = newList.filter((item) => item.id !== listId);
+    setNewList(filterDelete);
+  };
+
+  const confirmDelete = () => {
+    deleteItem(itemToDelete);
+    setItemToDelete(null);
+  };
+
+  const toggleComplete = (listId) => {
+    const filterComplete = newList.map((item) => {
+      if (item.id === listId) {
+        return { ...item, isDone: !item.isDone };
+      } else {
+        return item;
+      }
+    });
+    setNewList(filterComplete);
+  };
+
+  const edit = (list) => {
+    setEditId(list.id);
+    setEditText(list.text);
+  };
+
+  const saveEdit = () => {
+    const updateText = newList.map((list) => {
+      if (list.id === editId) {
+        return { ...list, text: editText };
+      } else {
+        return list;
+      }
+    });
+    setNewList(updateText);
+    setEditId(null);
+  };
+  const saveEditCategory = (idList, newCategoryValue) => {
+    const updateText = newList.map((list) => {
+      if (list.id === idList) {
+        return { ...list, category: newCategoryValue };
+      } else {
+        return list;
+      }
+    });
+    setNewList(updateText);
+    setEditCategoryId(null);
+  };
+
+  let filteredList = useMemo(() => {
+    let list = [...newList];
+    if (filter === "active") {
+      list = list.filter((item) => {
+        return item.isDone === false;
+      });
+    } else if (filter === "completed") {
+      list = list.filter((item) => {
+        return item.isDone === true;
+      });
+    }
+    list = list.filter((item) => {
+      return item.text.toLowerCase().includes(searchQuery.toLowerCase());
+    });
+
+    list.sort((a, b) => Number(a.isDone) - Number(b.isDone));
+    return list;
+  }, [filter, newList, searchQuery]);
+
+  const activeTasksCount = useMemo(() => {
+    return newList.filter((item) => item.isDone === false);
+  }, [newList]);
+
+  const clearCompleted = () => {
+    const uptadeCompleted = newList.filter((item) => {
+      return item.isDone === false;
+    });
+    setNewList(uptadeCompleted);
+  };
+
+  const completionPercentage = useMemo(() => {
+    const completedList = newList.filter((item) => item.isDone === true);
+    if (newList.length === 0) {
+      return 0;
+    } else {
+      return Math.round((completedList.length / newList.length) * 100);
+    }
+  }, [newList]);
+
+  const getPaletteColor = () => {
+    // 1. Створюємо масив із твоїх улюблених кольорів
+    const colors = [
+      // "#4a0e0e", // Темно-червоний
+      "#52525b", // Сірий
+      "#71717a", // Світло-сірий (але достатньо темний для білого тексту)
+      "#27272a", // Темно-сірий
+      "#18181b", // Майже чорний (чистий чорний #000000 часто виглядає занадто "жорстко")
+      // "#4a3018", // Коричневий
+      "#1e1e1e",
+    ];
+
+    // 2. Генеруємо випадкове число від 0 до кількості кольорів у масиві
+    const randomIndex = Math.floor(Math.random() * colors.length);
+
+    // 3. Повертаємо колір під цим випадковим номером
+    return colors[randomIndex];
+  };
+  return (
+    // У value ми покладемо те, що хочемо віддати іншим файлам
+    <TodoContext.Provider
+      value={{
+        addNewList,
+        deleteItem,
+        confirmDelete,
+        toggleComplete,
+        edit,
+        saveEdit,
+        clearCompleted,
+        inputText,
+        setInputText, // Додали!
+        deadlineDate,
+        setDeadlineDate, // Додали!
+        filter,
+        setFilter,
+        editId,
+        editText,
+        setEditText, // Додали!
+        itemToDelete,
+        setItemToDelete,
+        newList,
+        activeTasksCount,
+        filteredList,
+        completionPercentage,
+        category,
+        setCategory,
+        editCategoryId,
+        setEditCategoryId,
+        saveEditCategory,
+        searchQuery,
+        setSearchQuery,
+      }}
+    >
+      {children}
+    </TodoContext.Provider>
+  );
+}
+
+
+
+================================================
+FILE: src/context/useLocalStorage.jsx
+================================================
+import { useEffect, useState } from "react";
+
+export default function useLocalStorage(key, initialValue) {
+  // 1. Зчитуємо дані з localStorage (якщо вони там є) при першому запуску
+  const [value, setValue] = useState(() => {
+    const savedTodos = localStorage.getItem(key);
+    if (savedTodos) {
+      return JSON.parse(savedTodos);
+    } else {
+      return initialValue;
+    }
+  });
+
+  useEffect(() => {
+    localStorage.setItem(key, JSON.stringify(value));
+  }, [key, value]); // квадратні дужки вказують, за чим саме слідкувати
+  return [value, setValue];
+}
+
+

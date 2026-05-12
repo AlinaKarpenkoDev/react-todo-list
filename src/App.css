@@ -1,38 +1,572 @@
+body {
+  background-color: #121212;
+  color: #e0e0e0;
+  font-family: sans-serif;
+  margin: 0;
+  padding-top: 80px;
+}
+
 .App {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 0 20px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+h1 {
+  margin-bottom: 30px;
+}
+h2 {
+  font-size: 18px;
+  color: #7f7a85;
+  margin-bottom: 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+input,
+select,
+.search-input,
+.register-input {
+  background-color: #27272a;
+  color: #f4f4f5;
+  border: 1px solid #3f3f46;
+  border-radius: 6px;
+  padding: 12px 15px;
+  font-size: 16px;
+  transition: all 0.2s ease;
+  outline: none;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+input:focus,
+select:focus,
+.search-input:focus,
+.register-input:focus {
+  border-color: #deff9a;
+  box-shadow: 0 0 0 2px rgba(222, 255, 154, 0.15);
+}
+
+/* Специфічні налаштування для окремих інпутів */
+.search-input {
+  flex-grow: 0;
+  width: 150px;
+}
+
+input[type="date"] {
+  cursor: pointer;
+}
+
+.input-container {
   display: flex;
-  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 40px;
+  width: 100%; /* Змушуємо контейнер розтягнутися на всі 100% */
+}
+
+/* МАГІЯ ТУТ: Дозволяємо інпутам всередині форми рівномірно зайняти весь вільний простір */
+.input-container input,
+.input-container select {
+  flex-grow: 1;
+}
+
+/* Кнопка "Додати" біля інпуту */
+.input-container button {
+  padding: 0 20px;
+  background-color: #333;
+  color: white;
+  border: 1px solid #444;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.2s;
+  flex-shrink: 0; /* Забороняємо кнопці стискатися */
+}
+
+.input-container button:hover {
+  background-color: #555;
+}
+/* =========================================
+   3. ШАПКА (HEADER)
+   ========================================= */
+.header {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  margin-bottom: 30px;
+  padding: 10px 0;
+  width: 100%;
+}
+
+.header-left,
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.header-right {
+  gap: 15px;
+}
+.user-greeting {
+  color: #969595;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.theme-toggle-btn {
+  background-color: #2c2c2c;
+  color: #e0e0e0;
+  border: 1px solid #444;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.theme-toggle-btn:hover {
+  background-color: #444;
+  transform: scale(1.05);
+}
+
+.logout-btn {
+  background-color: transparent;
+  color: #ef4444;
+  border: 1px solid #ef4444;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+.logout-btn:hover {
+  background-color: #ef4444;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+/* Прибираємо зайві відступи, щоб шапка не стрибала */
+.search-input,
+.theme-toggle-btn,
+.logout-btn {
+  margin: 0 !important;
 }
 
-@keyframes App-logo-spin {
+/* =========================================
+   4. СПИСОК СПРАВ ТА КАРТКИ
+   ========================================= */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1e1e1e;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  text-align: left;
+}
+
+.task-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-grow: 1;
+}
+.done {
+  text-decoration: line-through;
+  color: #777;
+}
+
+.task-deadline {
+  font-size: 12px;
+  color: #aaa;
+  background-color: #333;
+  padding: 4px 10px;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+.overdue {
+  color: #ff5252;
+  background-color: rgba(255, 82, 82, 0.1);
+  font-weight: bold;
+}
+
+.category-badge {
+  font-size: 0.75rem;
+  background-color: #3a3a3c;
+  color: #a1a1aa;
+  padding: 4px 8px;
+  border-radius: 12px;
+  margin-right: 12px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.selectCategory {
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  background-color: transparent;
+  border: 1px dashed #71717a;
+  color: #71717a;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.selectCategory:hover {
+  border-color: #a1a1aa;
+  color: #a1a1aa;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* === КНОПКИ ДІЙ В КАРТЦІ === */
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+li button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+.btn-check {
+  color: #4caf50;
+}
+.btn-check:hover {
+  background-color: rgba(76, 175, 80, 0.1);
+}
+.btn-edit {
+  color: #ffb74d;
+}
+.btn-edit:hover {
+  background-color: rgba(255, 183, 77, 0.1);
+}
+.btn-delete {
+  color: #8e0000;
+}
+.btn-delete:hover {
+  background-color: rgba(255, 82, 82, 0.1);
+}
+
+/* Режим редагування справи */
+.edit-mode {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+}
+
+/* 👇 ДОДАЙ ЦЕЙ БЛОК: Дозволяємо інпуту редагування розтягнутися */
+.edit-mode input {
+  flex-grow: 1;
+}
+
+.btn-save {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 0 15px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.btn-save:hover {
+  background-color: #45a049;
+}
+
+/* =========================================
+   5. ФІЛЬТРИ ТА ПРОГРЕС
+   ========================================= */
+.filters {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #333;
+}
+.filters button {
+  background-color: #2c2c2c;
+  color: #aaa;
+  border: 1px solid #444;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.filters button:hover {
+  background-color: #444;
+  color: #fff;
+}
+.filters button.active-filter {
+  background-color: #bfb9b9;
+  color: #000;
+  border-color: #ffffff;
+  font-weight: bold;
+}
+
+.empty-msg {
+  color: #777;
+  font-style: italic;
+  margin-top: 20px;
+}
+
+.btn-clear {
+  background-color: transparent;
+  color: #c30909;
+  border: 1px solid #780606;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: all 0.2s ease-in-out;
+}
+.btn-clear:hover {
+  background-color: white;
+  color: #7f7a85;
+  border: 1px solid #817878;
+}
+
+.progress-container {
+  width: 100%;
+  height: 10px;
+  background-color: #444;
+  border-radius: 10px;
+  margin: 15px 0;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background-color: #4caf50;
+  transition: width 0.4s ease-in-out;
+}
+
+/* =========================================
+   6. ФОРМА РЕЄСТРАЦІЇ
+   ========================================= */
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 350px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #1a1a1a;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.error-message {
+  color: #cb3a3a;
+  font-size: 12px;
+  margin-top: -10px;
+}
+.input-error {
+  border-color: darkred !important;
+}
+
+.submit-btn {
+  padding: 12px;
+  background-color: #aeaeae;
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+/* =========================================
+   7. МОДАЛЬНЕ ВІКНО
+   ========================================= */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.modal-content {
+  background-color: #2c2c2c;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+  width: 90%;
+}
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+.btn-confirm {
+  background-color: #ff5252;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.btn-cancel {
+  background-color: transparent;
+  color: #aaa;
+  border: 1px solid #aaa;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* =========================================
+   8. СВІТЛА ТЕМА (Всі оновлення для світлої теми)
+   ========================================= */
+body.light-mode {
+  background-color: #f5f5f5;
+  color: #333;
+}
+body.light-mode li {
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+body.light-mode .progress-container {
+  background-color: #e0e0e0;
+}
+body.light-mode .task-deadline {
+  background-color: #eee;
+  color: #555;
+}
+body.light-mode .category-badge {
+  background-color: #e4e4e7;
+  color: #52525b;
+}
+body.light-mode .selectCategory {
+  border-color: #a1a1aa;
+  color: #a1a1aa;
+}
+body.light-mode .selectCategory:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #52525b;
+  border-color: #52525b;
+}
+body.light-mode .filters button {
+  background-color: #e0e0e0;
+  color: #555;
+  border-color: #ccc;
+}
+body.light-mode .filters button.active-filter {
+  background-color: #d0b5b5;
+  color: #fff;
+}
+body.light-mode .modal-content {
+  background-color: #fff;
+  color: #333;
+}
+body.light-mode .btn-cancel {
+  color: #555;
+  border-color: #555;
+}
+body.light-mode .register-form {
+  background-color: #f7f7f8;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+body.light-mode .theme-toggle-btn {
+  background-color: #ffffff;
+  color: #333;
+  border-color: #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+body.light-mode .theme-toggle-btn:hover {
+  background-color: #f0f0f0;
+}
+
+/* Універсальні інпути для світлої теми */
+body.light-mode input,
+body.light-mode select,
+body.light-mode .search-input,
+body.light-mode .register-input {
+  background-color: #ffffff;
+  color: #18181b;
+  border: 1px solid #d4d4d8;
+}
+body.light-mode input:focus,
+body.light-mode select:focus,
+body.light-mode .search-input:focus,
+body.light-mode .register-input:focus {
+  border-color: #71717a;
+  box-shadow: 0 0 0 2px rgba(113, 113, 122, 0.15);
+}
+
+@keyframes fadeIn {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
+    transform: translateY(15px);
   }
   to {
-    transform: rotate(360deg);
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* =========================================
+   10. АДАПТИВНІСТЬ (Для мобільних телефонів)
+   ========================================= */
+@media (max-width: 600px) {
+  /* Шапка складається у стовпчик */
+  .header {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .header-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  /* Форма додавання: інпути і кнопка один під одним */
+  .input-container {
+    flex-direction: column;
+  }
+
+  /* Фільтри можуть переноситися на новий рядок */
+  .filters {
+    flex-wrap: wrap;
+  }
+
+  /* Картка справи: текст зверху, кнопки знизу */
+  li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .task-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .action-buttons {
+    width: 100%;
+    justify-content: space-between;
+    border-top: 1px solid #333; /* Відділяємо кнопки лінією */
+    padding-top: 10px;
+  }
+
+  body.light-mode .action-buttons {
+    border-top: 1px solid #e4e4e7;
   }
 }
